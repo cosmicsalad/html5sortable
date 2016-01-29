@@ -222,6 +222,7 @@ var sortable = function(selector, options) {
   var method = String(options);
 
   options = $.extend({
+    axis: null,
     connectWith: false,
     placeholder: null,
     // dragImage can be null or a jQuery element
@@ -285,6 +286,33 @@ var sortable = function(selector, options) {
       }, function() {
         $(this).removeClass(hoverClass);
       });
+    }
+
+    // Axis stuff
+    if (options.axis) {
+      items.on('mousedown.h5s', function(e) {
+        e = e || window.event;
+        var start = 0, diff = 0;
+        if( e.pageX) start = evt.pageX;
+        else if( evt.clientX) start = evt.clientX;
+
+        elem.style.position = 'relative';
+        document.body.onmousemove = function(e) {
+            e = e || window.event;
+            var end = 0;
+            if( e.pageX) end = evt.pageX;
+            else if( evt.clientX) end = evt.clientX;
+
+            diff = end-start;
+            elem.style.left = diff+"px";
+        };
+        document.body.onmouseup = function() {
+            // do something with the action here
+            // elem has been moved by diff pixels in the X axis
+            elem.style.position = 'static';
+            document.body.onmousemove = document.body.onmouseup = null;
+        };
+      }
     }
 
     // Handle drag events on draggable items
