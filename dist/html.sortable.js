@@ -293,15 +293,15 @@ var sortable = function(selector, options) {
       items.on('mousedown.h5s', function(e) {
         e = e || window.event;
         var start = 0, diff = 0;
-        if( e.pageX) start = evt.pageX;
-        else if( evt.clientX) start = evt.clientX;
+        if( e.pageY) start = evt.pageY;
+        else if( evt.clientY) start = evt.clientY;
 
         elem.style.position = 'relative';
         document.body.onmousemove = function(e) {
             e = e || window.event;
             var end = 0;
-            if( e.pageX) end = evt.pageX;
-            else if( evt.clientX) end = evt.clientX;
+            if( e.pageY) end = evt.pageY;
+            else if( evt.clientY) end = evt.clientY;
 
             diff = end-start;
             elem.style.left = diff+"px";
