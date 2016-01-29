@@ -312,7 +312,7 @@ var sortable = function(selector, options) {
             elem.style.position = 'static';
             document.body.onmousemove = document.body.onmouseup = null;
         };
-      }
+      });
     }
 
     // Handle drag events on draggable items
